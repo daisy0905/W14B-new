@@ -10,7 +10,7 @@
 
         computed: {
             userImage: function() {
-                return this.$store.state.userUrl
+                return this.$store.state.userUrl;
             }
         }
     }

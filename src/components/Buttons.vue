@@ -14,14 +14,17 @@
             rockSelection: function() {
                 this.$store.commit("userGet", 0);
                 this.$store.commit("compGet");
+                this.$store.commit("checkWinner", 0);
             },
             paperSelection: function() {
                 this.$store.commit("userGet", 1);
                 this.$store.commit("compGet");
+                this.$store.commit("checkWinner", 1);
             },
             scissorSelection: function() {
                 this.$store.commit("userGet", 2);
                 this.$store.commit("compGet");
+                this.$store.commit("checkWinner", 2);
             }
         },
 

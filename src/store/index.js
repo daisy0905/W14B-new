@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import scoreCookies from "vue-cookies";
 
 Vue.use(Vuex);
 
@@ -22,11 +23,12 @@ export default new Vuex.Store({
         number: 0
       }
     ],
-    userUrl: "",
-    compUrl: "",
+    userUrl: "https://www.netclipart.com/pp/m/290-2901471_rock-paper-scissors-clipart.png",
+    compUrl: "https://www.netclipart.com/pp/m/290-2901471_rock-paper-scissors-clipart.png",
     userScore: 0,
     compScore: 0,
-    winner: ""
+    winner: "",
+    compIndex: ""
   },
   
   mutations: {
@@ -35,20 +37,32 @@ export default new Vuex.Store({
       console.log(state.userUrl)
      },
      compGet: function(state) {
-       state.compUrl = state.list[Math.floor(Math.random() * 3)].url;
-       console.log(state.compUrl)
+       let index = Math.floor(Math.random() * 3);
+       state.compUrl = state.list[index].url;
+       console.log(state.compUrl);
+       state.compIndex = index;
      },
-     checkWinner(state, data) {
-        let num = state.list[data].number-state.list[Math.floor(Math.random() * 3)].number;
+     checkWinner: function(state, data) {
+        let num = state.list[data].number-state.list[state.compIndex].number;
         if(num === 1 || num === -2 ) {
-          state.userScore++;
-          state.winner = "User Wins!"
+          state.userScore = state.userScore + 1;
+          state.winner = "User Wins!";
+          scoreCookies.set("userMark", state.userScore);
+          scoreCookies.set("compMark", state.compScore);
         } else if(num === 0) {
-          state.winner = "Tie!"
+          state.winner = "Tie!";
+          scoreCookies.set("userMark", state.userScore);
+          scoreCookies.set("compMark", state.compScore);
         } else if(num === 2 || num === -1) {
-          state.compScore++;
-          state.winner = "Computer Wins!"
+          state.compScore = state.compScore + 1;
+          state.winner = "Computer Wins!";
+          scoreCookies.set("userMark", state.userScore);
+          scoreCookies.set("compMark", state.compScore);
         }
+     },
+     reset: function() {
+       scoreCookies.remove("userMark");
+       scoreCookies.remove("compMark");
      }
 
   },
