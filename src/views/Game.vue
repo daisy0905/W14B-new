@@ -1,5 +1,7 @@
 <template>
   <div id="game">
+    <button @click="userCheck">User Check</button>
+    <h2>{{ userGreeting }}</h2>
     <score-board></score-board>
     <div id="user-player">
       <user-selection></user-selection>
@@ -34,10 +36,20 @@ import cookies from "vue-cookies";
       },
       logout: function() {
         cookies.remove("loginToken");
+        cookies.remove("userEmail");
         this.$router.push("./");
+      },
+      userCheck: function() {
+        this.$store.commit("tokenCheck");
+      }
+    },
+    computed: {
+      userGreeting: function() {
+        return this.$store.state.greeting;
       }
     }
   }
+
 </script>
 
 <style scoped>

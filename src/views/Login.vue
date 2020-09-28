@@ -48,6 +48,7 @@ export default {
         console.log(response);
         this.status = "Login Success!";
         cookies.set("loginToken", response.data.token);
+        cookies.set("userEmail", this.username);
         this.$router.push("Game");
       }).catch((error) => {
         console.log(error);

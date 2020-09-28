@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import scoreCookies from "vue-cookies";
+import cookies from "vue-cookies";
 
 Vue.use(Vuex);
 
@@ -28,7 +29,8 @@ export default new Vuex.Store({
     userScore: 0,
     compScore: 0,
     winner: "",
-    compIndex: ""
+    compIndex: "",
+    greeting: ""
   },
   
   mutations: {
@@ -63,8 +65,18 @@ export default new Vuex.Store({
      reset: function() {
        scoreCookies.remove("userMark");
        scoreCookies.remove("compMark");
-     }
-
+     },
+     tokenCheck: function(state) {
+      let token = cookies.get("loginToken");
+      let user = cookies.get("userEmail"); 
+      console.log(token);
+      console.log(user);
+       if(token == undefined) {
+         state.greeting = "No user is logged in";
+       } else {
+         state.greeting = "Welcome " + user;
+       }
+     },
   },
   actions: {},
   getters: {}
