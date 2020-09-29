@@ -72,7 +72,7 @@ export default new Vuex.Store({
       console.log(token);
       console.log(user);
        if(token == undefined) {
-         state.greeting = "No user is logged in";
+         state.greeting = "Sorry, you haven't logined in.";
        } else {
          state.greeting = "Welcome " + user;
        }

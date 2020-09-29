@@ -1,7 +1,8 @@
 <template>
   <div id="game">
-    <button @click="userCheck">User Check</button>
-    <h2>{{ userGreeting }}</h2>
+    <h3>{{ userGreeting }}</h3>
+    <h2 @click="userCheck">Are you ready? Click here!</h2>
+    <button @click="logout" class="game-btn">Logout</button>
     <score-board></score-board>
     <div id="user-player">
       <user-selection></user-selection>
@@ -9,7 +10,6 @@
     </div>
     <select-button></select-button>
     <button @click="gameRestart" class="game-btn">Restart</button>
-    <button @click="logout" class="game-btn">Logout</button>
 
   </div>
 </template>
@@ -60,6 +60,15 @@ import cookies from "vue-cookies";
       justify-items: center;
       align-items: center;
       margin-top: 10vh;
+  }
+
+  h2 {
+    color: orange;
+    text-shadow: 1px 1px 1px grey;
+  }
+
+  h2:hover {
+    cursor: pointer;
   }
 
   #user-player {
